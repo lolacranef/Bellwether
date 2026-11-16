@@ -1,0 +1,6 @@
+source_id,url,publisher,date,source_type,reliability,credibility,note
+EV-SEED,,Seed dataset (placeholder),2026-11-16,ANALYST_NOTE,B,2,Illustrative placeholder link for the demo; replace with a traced Sayari or trade record.
+EV-SEED-WEAK,,Seed dataset (placeholder),2026-11-16,ANALYST_NOTE,D,4,"Illustrative placeholder for a weak, unconfirmed link."
+EV-SEED-TENANT,,Seed dataset (placeholder),2026-11-16,ANALYST_NOTE,C,3,Illustrative tenant record; students replace it with a Sayari-traced tenant.
+EV-WILMERHALE-1260H,https://www.wilmerhale.com/en/insights/client-alerts/20260611-pentagon-adds-65-new-entities-to-the-1260h-list-of-chinese-military-companies,WilmerHale,2026-06-11,LEGAL_ANALYSIS,A,2,Reports InnoLight's June 2026 addition to the 1260H list.
+EV-SAYARI-MEGASPEED,https://graph.sayari.com/resource/entity/FN6-5HO_izVKgXRmQfy1jg,Sayari Graph,2026-11-16,PRIMARY,B,2,Corporate registry record for Megaspeed International Pte Ltd (Singapore).

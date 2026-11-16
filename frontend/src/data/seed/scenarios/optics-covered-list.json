@@ -1,0 +1,224 @@
+{
+  "label": "ILLUSTRATIVE",
+  "scenario": {
+    "id": "SCN-OPTICS-2026",
+    "name": "Optics & Covered-List Escalation (2026)",
+    "created": "2026-11-16",
+    "intel_items": ["INT-2026-0723-FCC-COMPONENT", "INT-2026-0804-FCC-XCVR", "INT-2026-0924-S5548", "INT-2026-0608-1260H", "INT-2026-COVERED-CATEGORIES"],
+    "horizon": { "start": "2026-10-01", "end": "2033-12-01", "step": "MONTH" },
+    "rules": [
+      { "rule_id": "R1", "likelihood": 1.0, "likelihood_basis": "Enacted; in force since 2026-10-13." },
+      { "rule_id": "R1-FW", "likelihood": 0.4, "likelihood_basis": "Proposed in the Third FNPRM; adoption and timing unknown." },
+      { "rule_id": "R2", "likelihood": 0.5, "likelihood_basis": "Single press report of an unpublished draft, plus a sell-side note." },
+      { "rule_id": "R2-LIST", "likelihood": 0.25, "likelihood_basis": "No reporting of a planned listing; FCC 26-50 notes these makers are not on the list." },
+      { "rule_id": "R3", "likelihood": 0.3, "likelihood_basis": "Introduced and referred to committee; bipartisan sponsors." },
+      { "rule_id": "R4", "likelihood": 1.0, "likelihood_basis": "Listed 2026-06-08; statutory effective dates." },
+      { "rule_id": "R5", "likelihood": 1.0, "likelihood_basis": "Enacted Covered List entry." },
+      { "rule_id": "R6", "likelihood": 1.0, "likelihood_basis": "Enacted Covered List entry." }
+    ],
+    "branches": [
+      { "id": "as-reported", "name": "As reported", "description": "R2 effective 2027-01-01 with the 65% carve-out. S.5548 enacted mid-2027.", "overrides": [] },
+      { "id": "delayed", "name": "Delayed 12 mo", "description": "R2 effective 2028-01-01. S.5548 not enacted.",
+        "overrides": [
+          { "rule_id": "R2", "path": "timing.effective_date", "value": "2028-01-01" },
+          { "rule_id": "R3", "path": "enabled", "value": false }
+        ] },
+      { "id": "broadened", "name": "Broadened", "description": "R2 reaches 1.6T with no BOM carve-out and either definition of Chinese. Optics makers added to the Covered List. Firmware rule adopted 2027.",
+        "overrides": [
+          { "rule_id": "R2", "path": "scope.min_generation_gbps", "value": 1600 },
+          { "rule_id": "R2", "path": "carve_outs", "value": [] },
+          { "rule_id": "R2", "path": "target.definition_mode", "value": "EITHER" },
+          { "rule_id": "R2-LIST", "path": "enabled", "value": true },
+          { "rule_id": "R1-FW", "path": "timing.effective_date", "value": "2027-07-01" },
+          { "rule_id": "R1-FW", "path": "applies_to_context", "value": ["NEW_FCC_AUTHORIZATION", "FIRMWARE_UPDATES"] }
+        ] },
+      { "id": "dropped", "name": "Dropped", "description": "Only enacted rules apply: the floor of exposure that exists today.",
+        "overrides": [
+          { "rule_id": "R2", "path": "enabled", "value": false },
+          { "rule_id": "R2-LIST", "path": "enabled", "value": false },
+          { "rule_id": "R3", "path": "enabled", "value": false },
+          { "rule_id": "R1-FW", "path": "enabled", "value": false }
+        ] }
+    ],
+    "events": []
+  },
+  "intel_items": [
+    {
+      "id": "INT-2026-0723-FCC-COMPONENT",
+      "title": "FCC bars new authorizations for devices with Covered List logic-bearing components",
+      "received_date": "2026-07-23",
+      "summary": "FCC 26-50 (Third Report & Order, ET Docket 21-232) bars new equipment authorizations for devices containing a logic-bearing hardware component produced by a Covered List entity, effective 2026-10-13. Existing authorizations are untouched. A Third FNPRM proposes extending the bar to software and firmware.",
+      "sources": [
+        { "id": "S-FCC-26-50", "url": "https://docs.fcc.gov/public/attachments/FCC-26-50A1.pdf", "publisher": "FCC", "date": "2026-07-23",
+          "source_type": "PRIMARY", "reliability": "A", "credibility": 1, "excerpt_note": "Order text adopting the logic-bearing component bar and proposing a firmware extension." },
+        { "id": "S-COOLEY-26-50", "url": "https://www.cooley.com/news/insight/2026/2026-07-29-fcc-expands-restrictions-on-covered-list-equipment-and-supply-chains",
+          "publisher": "Cooley", "date": "2026-07-29", "source_type": "LEGAL_ANALYSIS", "reliability": "A", "credibility": 2,
+          "excerpt_note": "Explains that the rule turns on who produced the component, not the brand of the finished device." }
+      ],
+      "instruments": ["FCC-26-50", "FCC-26-50-FNPRM"],
+      "analyst": "Seed scenario",
+      "notes": "Primary source available."
+    },
+    {
+      "id": "INT-2026-0804-FCC-XCVR",
+      "title": "Reported FCC draft would bar new Chinese transceiver models from 3.2T",
+      "received_date": "2026-08-04",
+      "summary": "Reuters reported, citing unnamed sources, that the FCC is drafting a ban on new Chinese optical transceiver models. Sell-side commentary says it would phase in from 3.2T and exempt modules with at least 65% US-sourced BOM value. The FCC has published nothing.",
+      "sources": [
+        { "id": "S-CIGNAL-REUTERS", "url": "https://cignal.ai/2026/08/fcc-ban-on-new-chinese-optical-modules/", "publisher": "Cignal AI (citing Reuters)", "date": "2026-08-04",
+          "source_type": "PRESS", "reliability": "B", "credibility": 3, "excerpt_note": "Relays the Reuters report of an unpublished FCC draft." },
+        { "id": "S-TRENDFORCE-MS", "url": "https://www.trendforce.com/news/?p=66486", "publisher": "TrendForce (citing Morgan Stanley)", "date": "2026-08-04",
+          "source_type": "ANALYST_NOTE", "reliability": "C", "credibility": 4, "excerpt_note": "Relays the 3.2T phase-in and 65% US-content figures; publication date approximate." }
+      ],
+      "instruments": ["FCC-XCVR-DRAFT", "COVERED-LIST-OPTICS"],
+      "analyst": "Seed scenario",
+      "notes": "No primary source. The 65% figure matches the domestic end product threshold, which may be where it comes from."
+    },
+    {
+      "id": "INT-2026-0924-S5548",
+      "title": "S.5548 would bar InnoLight and Eoptolink from federal national security systems",
+      "received_date": "2026-09-24",
+      "summary": "S.5548 was introduced on 2026-09-24 and referred to Senate HSGAC. It would bar the two firms, their subsidiaries and affiliates, and later designees from federal national security systems after a five-year transition.",
+      "sources": [
+        { "id": "S-S5548-TRACKER", "url": "https://www.quiverquant.com/bills/119/s-5548", "publisher": "Quiver Quantitative (bill tracker)", "date": "2026-09-24",
+          "source_type": "PRIMARY", "reliability": "B", "credibility": 2, "excerpt_note": "Bill text via tracker; congress.gov page not yet pulled directly." }
+      ],
+      "instruments": ["S5548"],
+      "analyst": "Seed scenario",
+      "notes": "Confirm waiver and transition language against congress.gov before citing."
+    },
+    {
+      "id": "INT-2026-0608-1260H",
+      "title": "InnoLight added to the 1260H list",
+      "received_date": "2026-06-11",
+      "summary": "The Department of War added InnoLight to the 1260H list on 2026-06-08 as a parent-level entry. Direct DoD contracting is barred from 2026-06-30, and procurement of the listed entities' goods from 2027-06-30.",
+      "sources": [
+        { "id": "S-WILMERHALE-1260H", "url": "https://www.wilmerhale.com/en/insights/client-alerts/20260611-pentagon-adds-65-new-entities-to-the-1260h-list-of-chinese-military-companies",
+          "publisher": "WilmerHale", "date": "2026-06-11", "source_type": "LEGAL_ANALYSIS", "reliability": "A", "credibility": 2, "excerpt_note": "Lists the June 2026 additions." },
+        { "id": "S-MOFO-1260H", "url": "https://www.mofo.com/resources/insights/260626-dod-expands-the-section-1260h-chinese-military-companies-list",
+          "publisher": "Morrison Foerster", "date": "2026-06-26", "source_type": "LEGAL_ANALYSIS", "reliability": "A", "credibility": 2, "excerpt_note": "Sets out the contracting and goods procurement dates." }
+      ],
+      "instruments": ["LIST-1260H"],
+      "analyst": "Seed scenario",
+      "notes": ""
+    },
+    {
+      "id": "INT-2026-COVERED-CATEGORIES",
+      "title": "Covered List entries for foreign-produced consumer routers and connected inverters",
+      "received_date": "2026-07-28",
+      "summary": "DA 26-278 (2026-03-23) put foreign-produced consumer-grade routers on the Covered List, with a Conditional Approval path of up to 18 months. DA 26-786 (2026-07-28) did the same for connected power inverters, with a domestic end product carve-out.",
+      "sources": [
+        { "id": "S-BAKER-DA26-278", "url": "https://www.bakermckenzie.com/en/insight/publications/2026/04/united-states-fcc-adds-foreign-made-routers-to-covered-list",
+          "publisher": "Baker McKenzie", "date": "2026-04-01", "source_type": "LEGAL_ANALYSIS", "reliability": "A", "credibility": 2, "excerpt_note": "Summarizes the router entry and its consumer-grade scope; publication date approximate." },
+        { "id": "S-WILEY-DA26-786", "url": "https://www.wiley.law/alert-FCC-Adds-Foreign-Produced-Power-Inverters-and-Advanced-Robotic-Devices-to-the-Covered-List",
+          "publisher": "Wiley", "date": "2026-07-28", "source_type": "LEGAL_ANALYSIS", "reliability": "A", "credibility": 2, "excerpt_note": "Describes the inverter entry and the domestic end product carve-out; publication date approximate." }
+      ],
+      "instruments": ["DA-26-278", "DA-26-786"],
+      "analyst": "Seed scenario",
+      "notes": "Pull actual Conditional Approval dates before relying on specific SKUs."
+    }
+  ],
+  "instruments": [
+    { "id": "FCC-26-50", "name": "FCC 26-50 Third Report & Order (component rule)", "authority": "FCC", "instrument_type": "ORDER", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-07-23", "status": "ENACTED", "source_id": "S-FCC-26-50" } ], "primary_source_available": true, "rules": ["R1"] },
+    { "id": "FCC-26-50-FNPRM", "name": "FCC 26-50 Third FNPRM (software and firmware)", "authority": "FCC", "instrument_type": "NPRM_FNPRM", "legal_status": "PROPOSED",
+      "status_history": [ { "date": "2026-07-23", "status": "PROPOSED", "source_id": "S-FCC-26-50" } ], "primary_source_available": true, "rules": ["R1-FW"] },
+    { "id": "FCC-XCVR-DRAFT", "name": "Reported FCC transceiver draft", "authority": "FCC", "instrument_type": "REPORTED_DRAFT", "legal_status": "REPORTED",
+      "status_history": [ { "date": "2026-08-04", "status": "REPORTED", "source_id": "S-CIGNAL-REUTERS" } ], "primary_source_available": false, "rules": ["R2"] },
+    { "id": "COVERED-LIST-OPTICS", "name": "Possible Covered List addition of Chinese optics makers", "authority": "FCC", "instrument_type": "COVERED_LIST_ENTRY", "legal_status": "RUMORED",
+      "status_history": [ { "date": "2026-08-04", "status": "RUMORED", "source_id": "S-TRENDFORCE-MS" } ], "primary_source_available": false, "rules": ["R2-LIST"] },
+    { "id": "S5548", "name": "S.5548", "authority": "CONGRESS", "instrument_type": "BILL", "legal_status": "INTRODUCED",
+      "status_history": [ { "date": "2026-09-24", "status": "INTRODUCED", "source_id": "S-S5548-TRACKER" } ], "primary_source_available": true, "rules": ["R3"] },
+    { "id": "LIST-1260H", "name": "Section 1260H list (InnoLight, June 2026)", "authority": "DOW", "instrument_type": "ENTITY_LIST", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-06-08", "status": "ENACTED", "source_id": "S-WILMERHALE-1260H" } ], "primary_source_available": true, "rules": ["R4"] },
+    { "id": "DA-26-278", "name": "DA 26-278 foreign-produced consumer routers", "authority": "FCC", "instrument_type": "COVERED_LIST_ENTRY", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-03-23", "status": "ENACTED", "source_id": "S-BAKER-DA26-278" } ], "primary_source_available": true, "rules": ["R5"] },
+    { "id": "DA-26-786", "name": "DA 26-786 foreign-produced connected inverters", "authority": "FCC", "instrument_type": "COVERED_LIST_ENTRY", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-07-28", "status": "ENACTED", "source_id": "S-WILEY-DA26-786" } ], "primary_source_available": true, "rules": ["R6"] }
+  ],
+  "rules": [
+    {
+      "id": "R1", "instrument_id": "FCC-26-50",
+      "description": "No new FCC authorization for a device that contains a logic-bearing component produced by a Covered List entity.",
+      "applies_to_context": ["NEW_FCC_AUTHORIZATION"],
+      "target": { "entity_list_refs": ["COVERED_LIST"], "include_affiliates": false },
+      "scope": { "product_categories": null, "component_trigger": "CONTAINS_LOGIC_BEARING_COMPONENT", "min_generation_gbps": null, "new_models_only": true },
+      "timing": { "effective_date": "2026-10-13" },
+      "carve_outs": [ { "type": "EXISTING_AUTHORIZATION" } ],
+      "confidence_note": "Primary source. Applies to hardware only and to new authorizations only."
+    },
+    {
+      "id": "R1-FW", "instrument_id": "FCC-26-50-FNPRM",
+      "description": "Proposed: extend the component bar to software and firmware from Covered List entities, reaching the installed base through updates.",
+      "applies_to_context": ["NEW_FCC_AUTHORIZATION"],
+      "target": { "entity_list_refs": ["COVERED_LIST"], "include_affiliates": false },
+      "scope": { "product_categories": null, "component_trigger": "CONTAINS_LOGIC_BEARING_COMPONENT", "min_generation_gbps": null, "new_models_only": false },
+      "timing": { "effective_date": null },
+      "carve_outs": [],
+      "confidence_note": "Proposal only. The effective date is a branch assumption."
+    },
+    {
+      "id": "R2", "instrument_id": "FCC-XCVR-DRAFT",
+      "description": "Reported: no new FCC authorization for optical transceiver models from Chinese producers at 3.2T and above, unless US-sourced BOM value is at least 65%.",
+      "applies_to_context": ["NEW_FCC_AUTHORIZATION"],
+      "target": { "producer_nationality": ["CHN"], "production_country": ["CHN"], "definition_mode": "PRODUCER", "include_affiliates": false },
+      "scope": { "product_categories": ["OPTICAL_TRANSCEIVER"], "component_trigger": "FINISHED_DEVICE", "min_generation_gbps": 3200, "new_models_only": true },
+      "timing": { "effective_date": "2027-01-01" },
+      "carve_outs": [ { "type": "US_BOM_VALUE_MIN", "threshold": 0.65, "note": "Sell-side figure. A 0.75-from-2029 schedule is a possible analogy to the domestic end product rule." } ],
+      "confidence_note": "No primary source. Scope, threshold and timing all come from press and a sell-side note."
+    },
+    {
+      "id": "R2-LIST", "instrument_id": "COVERED-LIST-OPTICS", "enabled": false,
+      "description": "Rumored: InnoLight, Eoptolink, Dongshan Precision and TFC (and affiliates) added to the Covered List, so their modules and any device containing their optical engines need new authorization they cannot get.",
+      "applies_to_context": ["NEW_FCC_AUTHORIZATION"],
+      "target": { "entity_ids": ["ENT-INNOLIGHT", "ENT-EOPTOLINK", "ENT-DONGSHAN", "ENT-TFC"], "include_affiliates": true },
+      "scope": { "product_categories": null, "component_trigger": "CONTAINS_LOGIC_BEARING_COMPONENT", "min_generation_gbps": null, "new_models_only": true },
+      "timing": { "effective_date": "2027-07-01" },
+      "carve_outs": [ { "type": "EXISTING_AUTHORIZATION" } ],
+      "confidence_note": "Branch only. FCC 26-50 notes these makers are not on the list today."
+    },
+    {
+      "id": "R3", "instrument_id": "S5548",
+      "description": "If enacted: federal national security systems may not use optics from InnoLight, Eoptolink, their subsidiaries and affiliates, after a five-year transition.",
+      "applies_to_context": ["FEDERAL_NSS_PROCUREMENT"],
+      "target": { "entity_ids": ["ENT-INNOLIGHT", "ENT-EOPTOLINK"], "include_affiliates": true },
+      "scope": { "product_categories": ["OPTICAL_TRANSCEIVER"], "component_trigger": "CONTAINS_ANY_COMPONENT", "min_generation_gbps": null, "new_models_only": false },
+      "timing": { "effective_date": "2027-06-30", "transition_years": 5 },
+      "carve_outs": [ { "type": "WAIVER", "note": "Waiver authority assumed; not modeled as a carve-out until the bill text is confirmed." } ],
+      "confidence_note": "Introduced only. Enactment date is a branch assumption."
+    },
+    {
+      "id": "R4", "instrument_id": "LIST-1260H",
+      "description": "DoD may not contract with 1260H-listed entities (from 2026-06-30) or buy their goods (from 2027-06-30). InnoLight and listed subsidiaries.",
+      "applies_to_context": ["DOD_CONTRACTING", "DOD_PROCUREMENT_GOODS"],
+      "target": { "entity_ids": ["ENT-INNOLIGHT"], "entity_list_refs": ["LIST_1260H"], "include_affiliates": true },
+      "scope": { "product_categories": null, "component_trigger": "CONTAINS_ANY_COMPONENT", "min_generation_gbps": null, "new_models_only": false },
+      "timing": { "effective_date": "2026-06-30", "context_effective_dates": { "DOD_CONTRACTING": "2026-06-30", "DOD_PROCUREMENT_GOODS": "2027-06-30" } },
+      "carve_outs": [],
+      "confidence_note": "Primary listing; dates from law-firm summaries of the statute."
+    },
+    {
+      "id": "R5", "instrument_id": "DA-26-278",
+      "description": "No new FCC authorization for foreign-produced consumer-grade routers, unless a DoW/DHS Conditional Approval (up to 18 months) is in force.",
+      "applies_to_context": ["NEW_FCC_AUTHORIZATION"],
+      "target": { "production_country_not_in": ["USA"], "definition_mode": "PRODUCTION_LOCATION" },
+      "scope": { "product_categories": ["ROUTER_CONSUMER"], "component_trigger": "FINISHED_DEVICE", "min_generation_gbps": null, "new_models_only": true },
+      "timing": { "effective_date": "2026-03-23" },
+      "carve_outs": [ { "type": "CONDITIONAL_APPROVAL" } ],
+      "confidence_note": "Enacted. Enterprise and datacenter routers are probably outside this entry."
+    },
+    {
+      "id": "R6", "instrument_id": "DA-26-786",
+      "description": "No new FCC authorization for foreign-produced connected power inverters, unless a domestic end product or under Conditional Approval.",
+      "applies_to_context": ["NEW_FCC_AUTHORIZATION"],
+      "target": { "production_country_not_in": ["USA"], "definition_mode": "PRODUCTION_LOCATION" },
+      "scope": { "product_categories": ["POWER_INVERTER_CONNECTED"], "component_trigger": "FINISHED_DEVICE", "min_generation_gbps": null, "new_models_only": true },
+      "timing": { "effective_date": "2026-07-28" },
+      "carve_outs": [
+        { "type": "DOMESTIC_END_PRODUCT", "threshold": 0.65, "threshold_schedule": [ { "from": "2029-01-01", "value": 0.75 } ] },
+        { "type": "CONDITIONAL_APPROVAL" }
+      ],
+      "confidence_note": "Enacted. Existing authorized models are unaffected unless significantly modified."
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "label": "ILLUSTRATIVE",
+  "scenario": {
+    "id": "SCN-REMOTE-ACCESS-2026",
+    "name": "Remote-Access Loophole (BIS IFR, Nov 2026)",
+    "created": "2026-11-16",
+    "intel_items": ["INT-2026-1116-BIS-IFR", "INT-2026-0115-BIS-IAAS", "INT-2026-0531-BIS-GUIDANCE", "INT-2026-1116-MEGASPEED"],
+    "horizon": { "start": "2026-10-01", "end": "2033-12-01", "step": "MONTH" },
+    "rules": [
+      { "rule_id": "RA1", "likelihood": 1.0, "likelihood_basis": "Interim final rule issued 2026-11-16." },
+      { "rule_id": "RA2", "likelihood": 1.0, "likelihood_basis": "Interim final rule issued 2026-11-16." },
+      { "rule_id": "RA3", "likelihood": 1.0, "likelihood_basis": "BIS guidance in force since May 2026." },
+      { "rule_id": "RA4", "likelihood": 1.0, "likelihood_basis": "Federal Register rule in force since January 2026." },
+      { "rule_id": "RA5", "likelihood": 0.4, "likelihood_basis": "Treasury says agencies have sought a listing for months; none made." },
+      { "rule_id": "RA6", "likelihood": 1.0, "likelihood_basis": "Discretionary authority; each notice is entered as an event." }
+    ],
+    "branches": [
+      { "id": "as-issued", "name": "As issued", "description": "IFR effective 2027-02-14 (+90 days).", "overrides": [] },
+      { "id": "megaspeed-listed", "name": "Megaspeed listed", "description": "Megaspeed and affiliates added to the Entity List on 2027-03-01.",
+        "overrides": [ { "rule_id": "RA5", "path": "enabled", "value": true } ] },
+      { "id": "tightened", "name": "Tightened threshold", "description": "The significant-volume threshold is set low, so most multi-tenant clouds in the region need licenses.",
+        "overrides": [ { "rule_id": "RA1", "path": "scope.volume_threshold.value", "value": 50000 } ] },
+      { "id": "rolled-back", "name": "Rolled back", "description": "The remote-access and smuggling-risk licensing requirements are withdrawn.",
+        "overrides": [
+          { "rule_id": "RA1", "path": "enabled", "value": false },
+          { "rule_id": "RA2", "path": "enabled", "value": false }
+        ] }
+    ],
+    "events": []
+  },
+  "intel_items": [
+    {
+      "id": "INT-2026-1116-BIS-IFR",
+      "title": "BIS interim final rule on remote access to advanced AI chips",
+      "received_date": "2026-11-16",
+      "summary": "BIS issued an interim final rule requiring a license to sell advanced chips to overseas data centers that supply significant computing volumes to firms headquartered in countries of concern, and to export advanced chips to companies headquartered in Indonesia, Malaysia, Singapore, Thailand or Brazil. Effective in 90 days. Thresholds must be confirmed from the Federal Register text.",
+      "sources": [
+        { "id": "S-BIS-IFR-PR", "url": "https://www.bis.gov/press-release/bis-issues-rule-addressing-remote-access-american-super-intelligence-technology",
+          "publisher": "BIS", "date": "2026-11-16", "source_type": "PRIMARY", "reliability": "A", "credibility": 2, "excerpt_note": "Press release announcing the rule; full rule text not yet pulled." },
+        { "id": "S-AXIOS-IFR", "url": "https://www.axios.com/2026/11/16/trump-admin-moves-to-close-china-ai-chip-loophole",
+          "publisher": "Axios", "date": "2026-11-16", "source_type": "PRESS", "reliability": "B", "credibility": 2, "excerpt_note": "Describes the license triggers and the five smuggling-risk countries." }
+      ],
+      "instruments": ["BIS-IFR-REMOTE"],
+      "analyst": "Seed scenario",
+      "notes": "The significant-volume threshold is a placeholder until the rule text is read."
+    },
+    {
+      "id": "INT-2026-0115-BIS-IAAS",
+      "title": "License applications must disclose IaaS remote end users",
+      "received_date": "2026-01-15",
+      "summary": "Since January 2026, license applications for advanced chips must list IaaS remote end users whose parent is headquartered in a listed country, and describe the consignee's KYC procedures.",
+      "sources": [
+        { "id": "S-FR-2026-00789", "url": "https://www.federalregister.gov/documents/2026/01/15/2026-00789/revision-to-license-review-policy-for-advanced-computing-commodities",
+          "publisher": "Federal Register", "date": "2026-01-15", "source_type": "PRIMARY", "reliability": "A", "credibility": 1, "excerpt_note": "Rule text on license review policy and remote end-user disclosure." }
+      ],
+      "instruments": ["FR-2026-00789"],
+      "analyst": "Seed scenario",
+      "notes": ""
+    },
+    {
+      "id": "INT-2026-0531-BIS-GUIDANCE",
+      "title": "BIS guidance on China-headquartered firms worldwide",
+      "received_date": "2026-05-31",
+      "summary": "BIS guidance said the November 2023 license requirement applies anywhere in the world when advanced chips go to China-headquartered firms or their subsidiaries.",
+      "sources": [
+        { "id": "S-QZ-GUIDANCE", "url": "https://qz.com/us-commerce-department-loophole-nvidia-ai-chips-china-053126",
+          "publisher": "Quartz (citing Reuters)", "date": "2026-05-31", "source_type": "PRESS", "reliability": "B", "credibility": 2, "excerpt_note": "Reports the guidance and its worldwide reach." }
+      ],
+      "instruments": ["BIS-GUIDANCE-2026-05"],
+      "analyst": "Seed scenario",
+      "notes": ""
+    },
+    {
+      "id": "INT-2026-1116-MEGASPEED",
+      "title": "Agencies have sought an Entity List designation for Megaspeed",
+      "received_date": "2026-11-16",
+      "summary": "Press reports that Megaspeed, a Singapore company with Malaysian and Indonesian subsidiaries, bought large volumes of advanced chips for Chinese customers; the company says its business is lawful. Treasury says several agencies have wanted it on the Entity List. It is not listed.",
+      "sources": [
+        { "id": "S-TIME-MEGASPEED", "url": "https://time.com/article/2026/11/16/trump-administration-ai-chips-nvidia-china",
+          "publisher": "TIME", "date": "2026-11-16", "source_type": "PRESS", "reliability": "B", "credibility": 3, "excerpt_note": "Quotes Treasury on the push to list Megaspeed." }
+      ],
+      "instruments": ["ENTITY-LIST-MEGASPEED", "IS-INFORMED"],
+      "analyst": "Seed scenario",
+      "notes": "Allegation, not a finding."
+    }
+  ],
+  "instruments": [
+    { "id": "BIS-IFR-REMOTE", "name": "BIS IFR on remote access (Nov 2026)", "authority": "COMMERCE_BIS", "instrument_type": "IFR", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-11-16", "status": "ENACTED", "source_id": "S-BIS-IFR-PR" } ], "primary_source_available": true, "rules": ["RA1", "RA2"] },
+    { "id": "BIS-GUIDANCE-2026-05", "name": "BIS guidance (May 2026)", "authority": "COMMERCE_BIS", "instrument_type": "GUIDANCE", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-05-31", "status": "ENACTED", "source_id": "S-QZ-GUIDANCE" } ], "primary_source_available": false, "rules": ["RA3"] },
+    { "id": "FR-2026-00789", "name": "License review policy rule 2026-00789", "authority": "COMMERCE_BIS", "instrument_type": "ORDER", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-01-15", "status": "ENACTED", "source_id": "S-FR-2026-00789" } ], "primary_source_available": true, "rules": ["RA4"] },
+    { "id": "ENTITY-LIST-MEGASPEED", "name": "Possible Entity List addition (Megaspeed)", "authority": "COMMERCE_BIS", "instrument_type": "ENTITY_LIST", "legal_status": "REPORTED",
+      "status_history": [ { "date": "2026-11-16", "status": "REPORTED", "source_id": "S-TIME-MEGASPEED" } ], "primary_source_available": false, "rules": ["RA5"] },
+    { "id": "IS-INFORMED", "name": "\"Is-informed\" notice authority", "authority": "COMMERCE_BIS", "instrument_type": "DETERMINATION", "legal_status": "ENACTED",
+      "status_history": [ { "date": "2026-11-16", "status": "ENACTED", "source_id": "S-BIS-IFR-PR" } ], "primary_source_available": true, "rules": ["RA6"] }
+  ],
+  "rules": [
+    {
+      "id": "RA1", "instrument_id": "BIS-IFR-REMOTE",
+      "description": "License required where a data center supplies significant computing volume to a tenant whose ultimate parent is headquartered in a country of concern.",
+      "applies_to_context": ["REMOTE_ACCESS_IAAS"],
+      "target": { "hq_country_of_ultimate_parent": ["CHN", "RUS", "IRN"], "ownership_test": "ULTIMATE_PARENT" },
+      "scope": { "product_categories": null, "volume_threshold": { "metric": "GPU_HOURS", "value": 250000, "unit": "GPU-hours per month", "confirmed": false },
+        "installed_base_treatment": "UNKNOWN" },
+      "timing": { "effective_date": "2027-02-14" },
+      "carve_outs": [],
+      "confidence_note": "Threshold value and full country list are placeholders until the Federal Register text is read."
+    },
+    {
+      "id": "RA2", "instrument_id": "BIS-IFR-REMOTE",
+      "description": "License required to export advanced chips to companies headquartered in Indonesia, Malaysia, Singapore, Thailand or Brazil.",
+      "applies_to_context": ["EXPORT_LICENSE_CHIPS"],
+      "target": { "smuggling_risk_hq_country": ["IDN", "MYS", "SGP", "THA", "BRA"] },
+      "scope": { "product_categories": ["SERVER"] },
+      "timing": { "effective_date": "2027-02-14" },
+      "carve_outs": [],
+      "confidence_note": "Press description of the IFR; confirm against rule text."
+    },
+    {
+      "id": "RA3", "instrument_id": "BIS-GUIDANCE-2026-05",
+      "description": "License required for advanced chips going to China-headquartered firms and their subsidiaries anywhere in the world.",
+      "applies_to_context": ["EXPORT_LICENSE_CHIPS"],
+      "target": { "hq_country_of_ultimate_parent": ["CHN"] },
+      "scope": { "product_categories": ["SERVER"] },
+      "timing": { "effective_date": "2026-05-31" },
+      "carve_outs": [],
+      "confidence_note": "Guidance reported by press; no primary text in the seed."
+    },
+    {
+      "id": "RA4", "instrument_id": "FR-2026-00789", "effect": "DISCLOSURE",
+      "description": "License applications must disclose IaaS remote end users whose parent is headquartered in a listed country, plus consignee KYC.",
+      "applies_to_context": ["EXPORT_LICENSE_CHIPS"],
+      "target": { "hq_country_of_ultimate_parent": ["CHN", "RUS", "IRN"] },
+      "scope": { "product_categories": ["SERVER"] },
+      "timing": { "effective_date": "2026-01-15" },
+      "carve_outs": [],
+      "confidence_note": "Primary source. Affects what a license application must contain, not whether one is needed."
+    },
+    {
+      "id": "RA5", "instrument_id": "ENTITY-LIST-MEGASPEED", "enabled": false,
+      "description": "Branch: Megaspeed and its affiliates added to the Entity List.",
+      "applies_to_context": ["ALL"],
+      "target": { "entity_ids": ["ENT-MEGASPEED"], "include_affiliates": true },
+      "scope": { "product_categories": null, "component_trigger": "CONTAINS_ANY_COMPONENT" },
+      "timing": { "effective_date": "2027-03-01" },
+      "carve_outs": [],
+      "confidence_note": "Reported push for a listing; not listed."
+    },
+    {
+      "id": "RA6", "instrument_id": "IS-INFORMED",
+      "description": "An \"is-informed\" notice imposes a license requirement on a named item or customer from the date of the notice.",
+      "applies_to_context": ["IS_INFORMED_NOTICE"],
+      "target": {},
+      "scope": { "product_categories": null },
+      "timing": { "effective_date": "2026-11-16" },
+      "carve_outs": [],
+      "confidence_note": "Discretionary and can be oral. Modeled as events on the timeline."
+    }
+  ]
+}

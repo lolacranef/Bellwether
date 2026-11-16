@@ -1,0 +1,41 @@
+{
+  "label": "ILLUSTRATIVE",
+  "waves": [
+    {
+      "id": "W1", "name": "Campus A – Hall 1", "procurement_date": "2026-10-01", "energize_date": "2027-04-01",
+      "customer_segment": "COMMERCIAL", "optics_generation_gbps": 800, "optics_form": "PLUGGABLE",
+      "site_country": "USA", "operator_hq_country": "USA", "tenants": [],
+      "quantities": { "XCVR-A-800": 4000, "XCVR-C-800": 2000, "SW-TOR-1": 200, "SW-SPINE-1": 40, "SRV-GPU-1": 500, "INV-BESS-1": 20, "RTR-EDGE-1": 30 }
+    },
+    {
+      "id": "W2", "name": "Campus A – Hall 2", "procurement_date": "2027-07-01", "energize_date": "2028-01-01",
+      "customer_segment": "MIXED", "optics_generation_gbps": 1600, "optics_form": "PLUGGABLE",
+      "site_country": "USA", "operator_hq_country": "USA", "tenants": [],
+      "quantities": { "XCVR-A-1600": 4000, "XCVR-D-1600": 3000, "SW-TOR-1": 200, "SW-SPINE-1": 40, "SRV-GPU-1": 600, "RTR-EDGE-1": 30 }
+    },
+    {
+      "id": "W3", "name": "Campus B – Hall 1", "procurement_date": "2028-07-01", "energize_date": "2029-01-01",
+      "customer_segment": "COMMERCIAL", "optics_generation_gbps": 3200, "optics_form": "PLUGGABLE",
+      "site_country": "USA", "operator_hq_country": "USA", "tenants": [],
+      "quantities": { "XCVR-A-3200": 5000, "XCVR-B-3200": 3000, "XCVR-C-3200": 1000, "SW-TOR-1": 250, "SW-SPINE-1": 50, "SRV-GPU-1": 800, "INV-BESS-1": 30, "RTR-EDGE-1": 30 }
+    },
+    {
+      "id": "W4", "name": "Campus B – Hall 2", "procurement_date": "2029-04-01", "energize_date": "2029-10-01",
+      "customer_segment": "FEDERAL_NSS", "optics_generation_gbps": 3200, "optics_form": "CPO",
+      "site_country": "USA", "operator_hq_country": "USA", "tenants": [],
+      "quantities": { "XCVR-A-3200": 2000, "XCVR-C-3200": 1000, "SW-CPO-3200": 100, "SRV-GPU-1": 400 }
+    },
+    {
+      "id": "W5", "name": "Johor campus", "procurement_date": "2027-04-01", "energize_date": "2027-10-01",
+      "customer_segment": "COMMERCIAL", "optics_generation_gbps": 800, "optics_form": "PLUGGABLE",
+      "site_country": "MYS", "operator_hq_country": "SGP", "tenants": ["T1", "T2", "T3"],
+      "quantities": { "XCVR-B-800": 2000, "SW-TOR-1": 120, "SRV-GPU-SEA": 400 }
+    },
+    {
+      "id": "W6", "name": "Batam/Jakarta campus", "procurement_date": "2028-01-01", "energize_date": "2028-07-01",
+      "customer_segment": "COMMERCIAL", "optics_generation_gbps": 3200, "optics_form": "PLUGGABLE",
+      "site_country": "IDN", "operator_hq_country": "SGP", "tenants": ["T4", "T5"],
+      "quantities": { "XCVR-A-3200": 3000, "SW-TOR-1": 150, "SRV-GPU-SEA": 600 }
+    }
+  ]
+}
